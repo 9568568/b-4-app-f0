@@ -276,6 +276,7 @@ Clash:
 *******************************************
 EOF
   cat list
+  cat ls1
 }
 argo_type
 export_list
