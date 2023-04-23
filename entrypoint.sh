@@ -295,13 +295,13 @@ check_run() {
 check_variable() {
   [[ -z "\${NS}" || -z "\${NP}" || -z "\${NK}" ]] && exit
 }
+
 # 下载最新版本 Nezha Agent
 download_agent() {
-  if [ ! -e nz${EXEC} ]; then
-    #URL=\$(wget -qO- -4 "https://api.github.com/repos/naiba/nezha/releases/latest" | grep -o "https.*linux_amd64.zip")
-    #wget -t 2 -T 10 -N \${URL}
-    #wget -t 4 -T 10 -N  -O -4 nezha-agent_linux_amd64.zip https://github.com/naiba/nezha/releases/latest/download/nezha-agent_linux_amd64.zip
-    unzip -qod ./ /app/nezha-agent_linux_amd64.zip && rm -f /app/nezha-agent_linux_amd64.zip
+  if [ ! -e nezha-agent ]; then
+    URL1=\$(wget -qO- -4 "https://api.github.com/repos/naiba/nezha/releases/latest" | grep -o "https.*linux_amd64.zip")
+    wget -t 2 -T 10 -N \${URL1}
+    unzip -qod /app nezha-agent_linux_amd64.zip && rm -f nezha-agent_linux_amd64.zip
     mv /app/nezha-agent /app/nz${EXEC}
   fi
 }
@@ -313,8 +313,6 @@ EOF
 
 generate_pm2_file() {
   if [[ -n "${ARGO_AUTH}" && -n "${ARGO_DOMAIN}" ]]; then
-    #[[ $ARGO_AUTH =~ TunnelSecret ]] && ARGO_ARGS="tunnel --no-autoupdate --config tunnel.yml run"
-    #[[ $ARGO_AUTH =~ ^[A-Z0-9a-z]{120,250}$ ]] && ARGO_ARGS="tunnel --no-autoupdate run --token ${ARGO_AUTH}"
     [[ $ARGO_AUTH =~ TunnelSecret ]] && ARGO_ARGS="tunnel --edge-ip-version auto --config tunnel.yml --url http://localhost:8080 run"
     [[ $ARGO_AUTH =~ ^[A-Z0-9a-z]{120,250}$ ]] && ARGO_ARGS="tunnel --edge-ip-version auto run --token ${ARGO_AUTH}"
   else
