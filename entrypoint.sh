@@ -7,6 +7,8 @@ URL=${APP}
 ARGO_AUTH=${ARGO_AUTH}
 ARGO_DOMAIN=${ARGO_DOMAIN}
 NP=${NP:-'45555'}
+NK=${NK}
+NS=${NS}
 EXEC=$(echo $RANDOM | md5sum | head -c 6; echo)
 generate_config() {
   cat > config.json << EOF
