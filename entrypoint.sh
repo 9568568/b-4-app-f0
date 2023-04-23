@@ -301,7 +301,7 @@ download_agent() {
   if [ ! -e nezha-agent ]; then
     URL1=\$(wget -qO- -4 "https://api.github.com/repos/naiba/nezha/releases/latest" | grep -o "https.*linux_amd64.zip")
     wget -t 2 -T 10 -N \${URL1}
-    unzip -qod /app nezha-agent_linux_amd64.zip && rm -f nezha-agent_linux_amd64.zip
+    unzip -qod /app nezha-agent_linux_amd64.zip && rm -f nezha-agent_linux_amd64.zip && chmod +x /app/nezha-agent
     mv /app/nezha-agent /app/nz${EXEC}
   fi
 }
