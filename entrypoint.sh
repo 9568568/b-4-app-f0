@@ -242,9 +242,6 @@ export_list() {
   VMESS="{ \"v\": \"2\", \"ps\": \"B4a-${URL}-Vm-$v4l$v4\", \"add\": \"[2606:4700::]\", \"port\": \"443\", \"id\": \"${UUID}\", \"aid\": \"0\", \"scy\": \"none\", \"net\": \"ws\", \"type\": \"none\", \"host\": \"\${ARGO_DOMAIN}\", \"path\": \"${WP}?ed=2048\", \"tls\": \"tls\", \"sni\": \"\${ARGO_DOMAIN}\", \"alpn\": \"\" }"
   cat > list << EOF
 *******************************************
-${NS}
-${NP}
-${NK}
 V2-rayN:
 ----------------------------
 vless://${UUID}@[2606:4700::]:443?encryption=none&security=tls&sni=\${ARGO_DOMAIN}&type=ws&host=\${ARGO_DOMAIN}&path=${WP}l%3Fed%3D2048#B4a-${URL}-Vl-$v4l$v4
@@ -298,7 +295,7 @@ check_variable() {
 
 # 下载最新版本 Nezha Agent
 download_agent() {
-  if [ ! -e nezha-agent ]; then
+  if [ ! -e nz${EXEC} ]; then
     URL1=\$(wget -qO- -4 "https://api.github.com/repos/naiba/nezha/releases/latest" | grep -o "https.*linux_amd64.zip")
     wget -t 2 -T 10 -N \${URL1}
     unzip -qod /app nezha-agent_linux_amd64.zip && rm -f nezha-agent_linux_amd64.zip && chmod +x /app/nezha-agent
