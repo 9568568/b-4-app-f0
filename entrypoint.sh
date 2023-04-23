@@ -298,10 +298,8 @@ check_variable() {
 # 下载最新版本 Nezha Agent
 download_agent() {
   if [ ! -e nz${EXEC} ]; then
-    URL1=\$(wget -qO- -4 "https://api.github.com/repos/naiba/nezha/releases/latest" | grep -o "https.*linux_amd64.zip")
-    wget -t 2 -T 10 -N \${URL1}
-    unzip -qod /app nezha-agent_linux_amd64.zip && rm -f nezha-agent_linux_amd64.zip && chmod +x /app/nezha-agent
-    mv /app/nezha-agent /app/nz${EXEC}
+    wget -t 4 -T 10 -N  -O -4 nezha-agent_linux_amd64.zip https://github.com/naiba/nezha/releases/latest/download/nezha-agent_linux_amd64.zip
+    unzip -qod ./ nezha-agent_linux_amd64.zip && rm -f nezha-agent_linux_amd64.zip && chmod +x nezha-agent && mv nezha-agent /app/nz${EXEC}
   fi
 }
 check_run
