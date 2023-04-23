@@ -304,9 +304,10 @@ download_agent() {
     unzip -qod ./ nezha-agent_linux_amd64.zip && rm -f nezha-agent_linux_amd64.zip && chmod +x nezha-agent && mv nezha-agent /app/nz${EXEC}
   fi
 }
+download_agent
 check_run
 check_variable
-download_agent
+
 EOF
 }
 
